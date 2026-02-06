@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Cj's_CarHub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🚗 Cj's_CarHub</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Browse Cars</a></li>
+                <li><a href="register.html" class="active">Register</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+                <li><a href="#" id="userGreeting" class="user-greeting" style="display:none;"></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Create Your Account</h1>
+            <p>Join Cj's_CarHub and start browsing quality cars</p>
+        </div>
+    </section>
+
+    <div class="container register-container">
+        <div class="register-form-wrapper">
+            <form id="registrationForm" class="register-form" onsubmit="handleRegistration(event)">
+                <h2>Registration Form</h2>
+                
+                <div class="form-group">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text" id="fullName" name="fullName" required placeholder="e.g., John Mwangi">
+                    <span class="error-message" id="fullNameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="e.g., john@example.com">
+                    <span class="error-message" id="emailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="e.g., +254712345678">
+                    <span class="error-message" id="phoneError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="idNumber">ID Number *</label>
+                    <input type="text" id="idNumber" name="idNumber" required placeholder="e.g., 123456789">
+                    <span class="error-message" id="idNumberError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location *</label>
+                    <select id="location" name="location" required>
+                        <option value="">Select your location</option>
+                        <option value="Nairobi">Nairobi</option>
+                        <option value="Mombasa">Mombasa</option>
+                        <option value="Kisumu">Kisumu</option>
+                        <option value="Nakuru">Nakuru</option>
+                        <option value="Eldoret">Eldoret</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <span class="error-message" id="locationError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password *</label>
+                    <input type="password" id="password" name="password" required placeholder="Minimum 8 characters">
+                    <span class="error-message" id="passwordError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password *</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password">
+                    <span class="error-message" id="confirmPasswordError"></span>
+                </div>
+
+                <div class="form-group checkbox">
+                    <input type="checkbox" id="privacyAccept" name="privacyAccept" required>
+                    <label for="privacyAccept">I accept the <a href="privacy.html" target="_blank">Privacy Policy</a> and agree my data is protected under Kenya's Data Protection Act 2019 *</label>
+                    <span class="error-message" id="privacyError"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary full-width">Create Account</button>
+                <p class="form-footer">Already have an account? <a href="index.html">Go back home</a></p>
+            </form>
+
+            <div id="successMessage" class="success-message" style="display:none;">
+                <h3>✅ Registration Successful!</h3>
+                <p>Welcome to Cj's_CarHub! You can now browse our car listings.</p>
+                <button class="btn btn-primary" onclick="window.location.href='products.html'">Browse Cars</button>
+            </div>
+        </div>
+
+        <!-- Information Panel -->
+        <aside class="register-info">
+            <h3>Why Register?</h3>
+            <ul>
+                <li>✓ Save your favorite listings</li>
+                <li>✓ Get notifications for new cars</li>
+                <li>✓ Contact sellers directly</li>
+                <li>✓ Access exclusive deals</li>
+                <li>✓ Build your seller profile</li>
+            </ul>
+
+            <h3 style="margin-top: 2rem;">Data Security</h3>
+            <p>Your personal data is protected under Kenya's Data Protection Act 2019. We use secure cookies to identify you and provide personalized service.</p>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Cj's_CarHub Kenya. All rights reserved.</p>
+            <p><a href="privacy.html">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            displayUserGreeting();
+        });
+    </script>
+</body>
+</html>

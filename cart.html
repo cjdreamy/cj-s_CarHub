@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Cj's_CarHub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>Cj's_CarHub</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Browse Cars</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="cart.html" class="active">🛒 Cart <span id="cartBadge" class="cart-badge" style="display:none;">0</span></a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+                <li><a href="#" id="userGreeting" class="user-greeting" style="display:none;"></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>🛒 Shopping Cart</h1>
+            <p>Review and manage your selected cars</p>
+        </div>
+    </section>
+
+    <div class="container cart-container">
+        <!-- Cart Items Table -->
+        <main class="cart-main">
+            <div id="emptyCart" class="empty-cart" style="display:none;">
+                <h2>Your cart is empty</h2>
+                <p>Browse our cars and add your favorites to get started</p>
+                <button class="btn btn-primary" onclick="window.location.href='products.html'">Continue Shopping</button>
+            </div>
+
+            <div id="cartContent" style="display:none;">
+                <h2>Your Selected Cars</h2>
+                
+                <div class="cart-table-wrapper">
+                    <table class="cart-table">
+                        <thead>
+                            <tr>
+                                <th>Car Name</th>
+                                <th>Type</th>
+                                <th>Location</th>
+                                <th>Unit Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cartTableBody">
+                            <!-- Cart items will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="cart-actions">
+                    <button class="btn btn-secondary" onclick="window.location.href='products.html'">Continue Shopping</button>
+                    <button class="btn btn-danger" onclick="clearCart()">Clear Cart</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Checkout Summary -->
+        <aside class="checkout-sidebar">
+            <div id="checkoutSection" style="display:none;" class="checkout-box">
+                <h3>Order Summary</h3>
+                
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span id="cartSubtotal">KES 0</span>
+                </div>
+                
+                <div class="summary-row tax-row">
+                    <span>Tax (16% VAT):</span>
+                    <span id="cartTax">KES 0</span>
+                </div>
+                
+                <div class="summary-row total-row">
+                    <span><strong>Total:</strong></span>
+                    <span id="cartTotal"><strong>KES 0</strong></span>
+                </div>
+
+                <button class="btn btn-primary full-width" style="margin-top: 1.5rem;" onclick="proceedToCheckout()">Proceed to Checkout</button>
+
+                <div class="checkout-info">
+                    <h4>Next Steps:</h4>
+                    <ol>
+                        <li>Review your selected cars</li>
+                        <li>Click "Proceed to Checkout"</li>
+                        <li>Arrange test drive and payment</li>
+                        <li>Complete vehicle inspection</li>
+                        <li>Finalize purchase and ownership transfer</li>
+                    </ol>
+                </div>
+
+                <div class="shipping-info">
+                    <h4>Delivery Options:</h4>
+                    <p>We offer delivery across Kenya. Contact us for shipping quotes based on your location.</p>
+                </div>
+
+                <div class="warranty-info">
+                    <h4>✅ Quality Assurance:</h4>
+                    <p>All vehicles come with verified condition reports. No hidden issues guarantee.</p>
+                </div>
+            </div>
+
+            <div class="cart-tips">
+                <h4>💡 Shopping Tips</h4>
+                <ul>
+                    <li>Compare prices across locations</li>
+                    <li>Check mileage and fuel type</li>
+                    <li>Request vehicle history report</li>
+                    <li>Arrange pre-purchase inspection</li>
+                    <li>Verify ownership documents</li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Cj's_CarHub Kenya. All rights reserved.</p>
+            <p><a href="privacy.html">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            displayUserGreeting();
+            updateCartBadge();
+            const cart = getCart();
+            
+            if (cart.length > 0) {
+                document.getElementById('emptyCart').style.display = 'none';
+                document.getElementById('cartContent').style.display = 'block';
+                displayCartItems();  
+                updateCartSummary();
+            } else {
+                document.getElementById('emptyCart').style.display = 'block';
+                document.getElementById('cartContent').style.display = 'none';
+            }
+        });
+
+        function updateCartSummary() {
+            const cart = getCart();
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const tax = Math.round(subtotal * 0.16);
+            const total = subtotal + tax;
+
+            document.getElementById('cartSubtotal').textContent = 'KES ' + subtotal.toLocaleString();
+            document.getElementById('cartTax').textContent = 'KES ' + tax.toLocaleString();
+            document.getElementById('cartTotal').textContent = 'KES ' + total.toLocaleString();
+        }
+
+        // Update summary when quantity changes
+        const originalUpdateQuantity = updateCartQuantity;
+        window.updateCartQuantity = function(carId, newQuantity) {
+            originalUpdateQuantity(carId, newQuantity);
+            updateCartSummary();
+        };
+    </script>
+</body>
+</html>

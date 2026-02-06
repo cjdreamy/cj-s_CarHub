@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cj's_CarHub - Online Car Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Show loader on page load
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('myloader');
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 2000); // Simulate loading time
+        });
+    </script>
+    <style>
+        .hero{
+                background-image: url(images/carDb/divo.jpg);
+                height: 100vh;
+                background-repeat: none;
+                background-size: cover;
+                background-position: center;
+
+        }
+        .dot{
+            font-weight: bolder;
+            font-size: larger;
+            display: inline-block;
+            margin: 0 4px;
+            animation: bounce 1s infinite, Acolor 1.5s infinite;
+        }
+        .dot:nth-child(1){
+            animation-delay: 0s;
+        }
+        .dot:nth-child(2){
+            animation-delay: 0.2s;
+        }
+        .dot:nth-child(3){
+            animation-delay: 0.4s;
+        }
+
+        @keyframes bounce {
+            0%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40%{
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes Acolor {
+            0%{
+                color: aqua;
+            }
+            25%{
+                color: red;
+            }
+            50%{
+                color: green;
+            }
+            100%{
+                color: aqua;
+            }
+        }
+
+        .car-loader{
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border-bottom: solid red 3px;
+            border-top: solid green 5px;
+            animation: car-loader linear 1.5s infinite;
+        }
+        @keyframes car-loader {
+            from{
+                transform: rotate(20deg);
+            }
+            to{
+                transform: rotate(360deg);
+            }
+        }
+
+        #myloader{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            color: aqua;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+<body>
+    <div id="myloader">
+        <div>LOADING
+            <span class="dot">.</span>
+            <span class="dot">.</span>
+            <span class="dot">.</span>
+        </div>
+        <div class="car-loader"></div>
+    </div>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>Cj's_CarHub</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="products.html">Browse Cars</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="cart.html">🛒 Cart <span id="cartBadge" class="cart-badge" style="display:none;">0</span></a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+                <li><a href="#" id="userGreeting" class="user-greeting" style="display:none;"></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Welcome to Cj's_CarHub Kenya</h2>
+            <p>Your trusted online marketplace for quality cars</p>
+            <button class="btn btn-primary" onclick="window.location.href='products.html'">Browse Cars</button>
+        </div>
+    </section>
+
+    <!-- Featured Cars Section -->
+    <section class="featured-section">
+        <div class="container">
+            <h2>Featured Cars</h2>
+            <div class="cars-grid">
+                <div class="car-card">
+                    <div class="car-image"><img src="images/carDb/toyotaCamry.jpg" alt="toyota camry" loading="lazy"></div>
+                    <h3>Toyota Camry 2020</h3>
+                    <p class="price">KES 2,500,000</p>
+                    <p class="specs">Sedan • 45,000 km • Auto</p>
+                    <p class="location">Nairobi</p>
+                    <button class="btn btn-secondary" onclick="viewDetails('camry')">View Details</button>
+                </div>
+
+                <div class="car-card">
+                    <div class="car-image"><img src="images/carDb/hondaCivic.jpg" alt="honda civic" loading="lazy"></div>
+                    <h3>Honda Civic 2019</h3>
+                    <p class="price">KES 1,800,000</p>
+                    <p class="specs">Sedan • 52,000 km • Auto</p>
+                    <p class="location"> Mombasa</p>
+                    <button class="btn btn-secondary" onclick="viewDetails('civic')">View Details</button>
+                </div>
+
+                <div class="car-card">
+                    <div class="car-image"><img src="images/carDb/ToyotaHiace.webp" alt="toyota hiace" loading="lazy"></div>
+                    <h3>Toyota Hiace 2018</h3>
+                    <p class="price">KES 1,950,000</p>
+                    <p class="specs">Minibus • 78,000 km • Manual</p>
+                    <p class="location">Kisumu</p>
+                    <button class="btn btn-secondary" onclick="viewDetails('hiace')">View Details</button>
+                </div>
+
+                <div class="car-card">
+                    <div class="car-image"><img src="images/carDb/SuzukiSwift.jpg" alt="SuzukiSwift" loading="lazy"></div>
+                    <h3>Suzuki Swift 2021</h3>
+                    <p class="price">KES 1,600,000</p>
+                    <p class="specs">Hatchback • 35,000 km • Auto</p>
+                    <p class="location"> Nairobi</p>
+                    <button class="btn btn-secondary" onclick="viewDetails('swift')">View Details</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>Why Choose Cj's_CarHub?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><img src="images/icons/verifiedSeller.png" alt="✅verified" loading="lazy"></div>
+                    <h3>Verified Sellers</h3>
+                    <p>All sellers are verified and trusted members of our platform</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><img src="images/icons/secure_txn.png" alt="secure" loading="lazy"></div>
+                    <h3>Secure Transactions</h3>
+                    <p>Your data is protected under Kenya's Data Protection Act 2019</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><img src="images/icons/ease_use.png" alt="mobile friendl" loading="lazy"></div>
+                    <h3>Easy to Use</h3>
+                    <p>Simple search and filter options for finding your perfect car</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><img src="images/icons/variety.png" alt="variety icon"></div>
+                    <h3>Wide Selection</h3>
+                    <p>Browse thousands of cars from across Kenya</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Find Your Dream Car?</h2>
+            <p>Register now and get access to exclusive listings</p>
+            <button class="btn btn-primary" onclick="window.location.href='register.html'">Register Now</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Cj's_CarHub Kenya. All rights reserved.</p>
+            <p><a href="privacy.html">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Display user greeting if logged in
+        displayUserGreeting();
+    </script>
+</body>
+</html>
