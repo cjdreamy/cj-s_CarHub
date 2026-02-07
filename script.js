@@ -495,7 +495,170 @@ function proceedToCheckout() {
     alert(message);
 }
 
+/* ==================== COOKIE CONSENT MANAGEMENT ==================== */
+// Initialize cookie consent banner
+function initializeCookieConsent() {
+    // Check if user has already made a cookie choice
+    const cookiePreferences = getCookie('cookiePreferences');
+    
+    if (!cookiePreferences) {
+        // Show the banner if no preferences have been set
+        setTimeout(() => {
+            const banner = document.getElementById('cookieBanner');
+            if (banner) banner.classList.add('show');
+        }, 1000);
+    } else {
+        // Apply saved preferences
+        applyCookiePreferences(JSON.parse(cookiePreferences));
+    }
+}
+
+// Get cookie preferences object with defaults
+function getDefaultCookiePreferences() {
+    return {
+        essential: true,      // Always true, can't be unchecked
+        analytics: false,
+        marketing: false,
+        preferences: false
+    };
+}
+
+// Save cookie preferences
+function saveCookiePreferences(preferences) {
+    setCookie('cookiePreferences', JSON.stringify(preferences), 365);
+    applyCookiePreferences(preferences);
+    hideCookieConsent();
+}
+
+// Apply cookie preferences (load tracking scripts, etc.)
+function applyCookiePreferences(preferences) {
+    console.log('Cookie Preferences Applied:', preferences);
+    
+    // Essential cookies are always enabled
+    if (preferences.essential) {
+        // Essential scripts already run (security, session management)
+        console.log('Essential cookies enabled');
+    }
+    
+    // Analytics cookies
+    if (preferences.analytics) {
+        console.log('Analytics cookies enabled');
+        
+    }
+    
+    // Marketing cookies
+    if (preferences.marketing) {
+        console.log('Marketing cookies enabled');
+       
+    }
+    
+    // Preference cookies
+    if (preferences.preferences) {
+        console.log('Preference cookies enabled');
+        // These are used to remember user settings
+    }
+}
+
+// Show cookie banner
+function showCookieConsent() {
+    const banner = document.getElementById('cookieBanner');
+    if (banner) banner.classList.add('show');
+}
+
+// Hide cookie banner
+function hideCookieConsent() {
+    const banner = document.getElementById('cookieBanner');
+    if (banner) banner.classList.remove('show');
+}
+
+// Show settings modal
+function showCookieSettings() {
+    const modal = document.getElementById('cookieModal');
+    if (modal) modal.classList.add('show');
+    
+    // Load current preferences into modal
+    const cookiePreferences = getCookie('cookiePreferences');
+    if (cookiePreferences) {
+        const prefs = JSON.parse(cookiePreferences);
+        document.getElementById('analyticsCookies').checked = prefs.analytics;
+        document.getElementById('marketingCookies').checked = prefs.marketing;
+        document.getElementById('preferencesCookies').checked = prefs.preferences;
+    }
+}
+
+// Hide settings modal
+function hideCookieSettings() {
+    const modal = document.getElementById('cookieModal');
+    if (modal) modal.classList.remove('show');
+}
+
+// Accept all cookies
+function acceptAllCookies() {
+    const preferences = {
+        essential: true,
+        analytics: true,
+        marketing: true,
+        preferences: true
+    };
+    saveCookiePreferences(preferences);
+}
+
+// Reject all non-essential cookies
+function rejectAllCookies() {
+    const preferences = {
+        essential: true,
+        analytics: false,
+        marketing: false,
+        preferences: false
+    };
+    saveCookiePreferences(preferences);
+}
+
+// Save custom preferences from modal
+function saveCustomPreferences() {
+    const preferences = {
+        essential: true,  // Always enabled
+        analytics: document.getElementById('analyticsCookies').checked,
+        marketing: document.getElementById('marketingCookies').checked,
+        preferences: document.getElementById('preferencesCookies').checked
+    };
+    saveCookiePreferences(preferences);
+    hideCookieSettings();
+}
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
     initializeSession();
+    initializeCookieConsent();
+    
+    // Set up event listeners for cookie banner
+    const acceptBtn = document.getElementById('acceptCookies');
+    const rejectBtn = document.getElementById('rejectCookies');
+    const settingsBtn = document.getElementById('cookieSettings');
+    
+    if (acceptBtn) acceptBtn.addEventListener('click', acceptAllCookies);
+    if (rejectBtn) rejectBtn.addEventListener('click', rejectAllCookies);
+    if (settingsBtn) settingsBtn.addEventListener('click', showCookieSettings);
+    
+    // Set up event listeners for cookie modal
+    const closeBtn = document.querySelector('.close-modal');
+    const acceptAllPrefsBtn = document.getElementById('acceptAllPrefs');
+    const rejectAllPrefsBtn = document.getElementById('rejectAllPrefs');
+    const savePrefsBtn = document.getElementById('savePreferences');
+    
+    if (closeBtn) closeBtn.addEventListener('click', hideCookieSettings);
+    if (acceptAllPrefsBtn) acceptAllPrefsBtn.addEventListener('click', acceptAllCookies);
+    if (rejectAllPrefsBtn) rejectAllPrefsBtn.addEventListener('click', rejectAllCookies);
+    if (savePrefsBtn) savePrefsBtn.addEventListener('click', saveCustomPreferences);
+    
+    // Close modal when clicking outside of it
+    const modal = document.getElementById('cookieModal');
+    if (modal) {
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                hideCookieSettings();
+            }
+        });
+    }
 });
+

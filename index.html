@@ -107,6 +107,78 @@
         </div>
         <div class="car-loader"></div>
     </div>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookieBanner" class="cookie-banner">
+        <div class="cookie-container">
+            <div class="cookie-content">
+                <h3>Cookie & Privacy Notice</h3>
+                <p>We use cookies to enhance your browsing experience, analyze site traffic, and personalize content. Your privacy is important to us. You can customize your preferences or accept all.</p>
+            </div>
+            <div class="cookie-buttons">
+                <button id="rejectCookies" class="btn btn-secondary">Reject All</button>
+                <button id="cookieSettings" class="btn btn-warning">Settings</button>
+                <button id="acceptCookies" class="btn btn-primary">Accept All</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Preferences Modal -->
+    <div id="cookieModal" class="cookie-modal">
+        <div class="cookie-modal-content">
+            <div class="cookie-modal-header">
+                <h2>Cookie Preferences</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="cookie-modal-body">
+                <div class="cookie-preference">
+                    <div class="preference-header">
+                        <input type="checkbox" id="essentialCookies" checked disabled>
+                        <div class="preference-title">
+                            <label for="essentialCookies"><strong>Essential Cookies (Required)</strong></label>
+                            <p class="preference-desc">These cookies are necessary for the website to function properly. They enable basic features like security and navigation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cookie-preference">
+                    <div class="preference-header">
+                        <input type="checkbox" id="analyticsCookies">
+                        <div class="preference-title">
+                            <label for="analyticsCookies"><strong>Analytics Cookies</strong></label>
+                            <p class="preference-desc">These cookies help us understand how visitors interact with our website, so we can improve your experience.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cookie-preference">
+                    <div class="preference-header">
+                        <input type="checkbox" id="marketingCookies">
+                        <div class="preference-title">
+                            <label for="marketingCookies"><strong>Marketing Cookies</strong></label>
+                            <p class="preference-desc">These cookies are used to track your activity and show you personalized ads on other websites based on your interests.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cookie-preference">
+                    <div class="preference-header">
+                        <input type="checkbox" id="preferencesCookies">
+                        <div class="preference-title">
+                            <label for="preferencesCookies"><strong>Preference Cookies</strong></label>
+                            <p class="preference-desc">These cookies remember your choices (language, region, theme) to provide a more personalized experience.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cookie-modal-footer">
+                <button id="rejectAllPrefs" class="btn btn-secondary">Reject All</button>
+                <button id="acceptAllPrefs" class="btn btn-primary">Accept All</button>
+                <button id="savePreferences" class="btn btn-success">Save Preferences</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="container">
