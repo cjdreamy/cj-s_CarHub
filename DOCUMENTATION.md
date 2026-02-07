@@ -214,7 +214,7 @@ projo/
 
 ## 10. HOW TO USE
 
-1. **Open index.html** in any modern web browser , accept cookies banner will show , choose your preferences
+1. **Open index.html / or https://cjdreamy.github.io/cj-s_CarHub/index.html** in any modern web browser , accept cookies banner will show , choose your preferences
 2. **Browse Cars** - Navigate to products page and use filters
 3. **Register** - Fill registration form with validation
 4. **View Details** - Click car cards to see full specifications
