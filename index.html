@@ -11,7 +11,7 @@
             const loader = document.getElementById('myloader');
             setTimeout(() => {
                 loader.style.display = 'none';
-            }, 2000); // Simulate loading time
+            }, 1000); // Simulate loading time
         });
     </script>
     <style>
@@ -96,6 +96,11 @@
             color: aqua;
             font-weight: bolder;
         }
+        em{
+            color: aqua;
+            font-size: larger;
+            font-weight: bolder;
+        }
     </style>
 </head>
 <body>
@@ -114,6 +119,7 @@
             <div class="cookie-content">
                 <h3>Cookie & Privacy Notice</h3>
                 <p>We use cookies to enhance your browsing experience, analyze site traffic, and personalize content. Your privacy is important to us. You can customize your preferences or accept all.</p>
+                <p>By continuing you agree to our privacy policy <a href="privacy.html"><em>Learn More</em></a></p>
             </div>
             <div class="cookie-buttons">
                 <button id="rejectCookies" class="btn btn-secondary">Reject All</button>
